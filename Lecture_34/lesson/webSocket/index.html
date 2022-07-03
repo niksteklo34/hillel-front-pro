@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button class="btn">FF</button>
+<div class="wrap"></div>
+
+<script>
+    const ws = new WebSocket('ws://localhost:3002');
+
+    ws.onmessage = (rawMessage) => {
+        console.log('Message from server: ', JSON.parse(rawMessage.data))
+
+        const data = JSON.parse(rawMessage.data);
+
+        const wrap = document.querySelector('.wrap');
+
+        if (Array.isArray(data)) {
+            data.forEach((message) => {
+                wrap.innerHTML += `<p>id: ${message.id} ___ Name: ${message.name}</p>`;
+            });
+
+            return;
+        }
+
+        wrap.innerHTML += `<p>id: ${data.id} ___ Name: ${data.name}</p>`
+    };
+
+    const btn = document.querySelector('.btn');
+
+    let id = 0;
+
+    btn.addEventListener('click', (data) => {
+        ws.send(JSON.stringify({id: ++id, name: 'Nikita'}));
+    });
+</script>
+</body>
+</html>

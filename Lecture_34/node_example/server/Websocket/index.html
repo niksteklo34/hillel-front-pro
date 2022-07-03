@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button class="btn">FF</button>
+
+    <script>
+        const ws = new WebSocket('ws://localhost:8081');
+
+        ws.onmessage = (rawMessage) => {
+            console.log('MESSAGE!!', JSON.parse(rawMessage.data))
+        };
+
+        document.querySelector('.btn').addEventListener('click', (data) => {
+            ws.send(JSON.stringify({id:1, name: 'Nikita'}));
+        });
+    </script>
+</body>
+</html>
