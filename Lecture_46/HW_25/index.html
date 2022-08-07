@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT School</title>
+</head>
+
+<body>
+  <script src="./lesson.js"></script>
+  <script src="./course.js"></script>
+  <script src="./learning-group.js"></script>
+  <script src="./it-school.js"></script>
+  <script>
+    // создание новой школы
+    const itSchool = new ITSchool("My test school", "The first online school ever!", 30, 15);
+
+    // регистрация нового курса
+    itSchool.registerCourse("Front-end Pro", 38, 3);
+
+    // // запуск новой группы
+    itSchool.startLearningGroup("Front-end Pro", "Andrii Doroshenko", 10);
+    itSchool.startLearningGroup("Front-end Pro", "Andrii Doroshenko", 10);
+    itSchool.startLearningGroup("Front-end Basic", "Andrii Doroshenko", 10);
+
+    // // работа с группой
+    const group = itSchool.getLearningGroups("Front-end Pro")
+    .find((group) => group.teacherName === "Andrii Doroshenko");
+    group.doneLesson("Classes in JS", ["Object.create()", "Function Constructors", "Classes"]);
+    console.log(group);
+  </script>
+</body>
+
+</html>
